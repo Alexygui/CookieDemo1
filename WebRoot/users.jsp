@@ -26,16 +26,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <h1>用户信息</h1>
     <hr>
     <%
+    request.setCharacterEncoding("utf-8");
     String username = "";
     String password = "";
     Cookie[] cookies = request.getCookies();
     if(cookies != null && cookies.length > 0) {
     		for(Cookie c : cookies) {
     			if(c.getName().equals("username")) {
-    				username = c.getValue();
+    				//使用URLEncoder.encode进行解码
+    				username = URLDecoder.decode(c.getValue(), "utf-8");
     			}
     			if(c.getName().equals("password")) {
-				password = c.getValue();
+				password = URLDecoder.decode(c.getValue(), "utf-8");
     			}
     		}
     }

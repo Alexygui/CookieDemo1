@@ -31,12 +31,15 @@
 	<br>
 	<br>
 	<%
+		request.setCharacterEncoding("utf-8");
 		//首先判断用户是有选择了记住登录状态
 		String[] isUseCookes = request.getParameterValues("isUseCookie");
 		if (isUseCookes != null && isUseCookes.length > 0) {
-			//把用户名和密码保存在Cookie对象里面
-			String username = request.getParameter("username");
-			String password = request.getParameter("password");
+			//把用户名和密码保存在Cookie对象里面，使用URLEncoder.encode进行编码
+			String username = URLEncoder.encode(request.getParameter("username"), "utf-8");
+			String password = URLEncoder.encode(request.getParameter("password"), "utf-8");
+			
+			
 			//保存为Cookie类型
 			Cookie usernameCookie = new Cookie("username", username);
 			Cookie passwordCookie = new Cookie("password", password);

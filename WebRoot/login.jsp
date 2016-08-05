@@ -26,16 +26,17 @@
 	<h1>用户登录</h1>
 	<hr>
 	<%
+		request.setCharacterEncoding("utf-8");
 		String username = "";
 		String password = "";
 		Cookie[] cookies = request.getCookies();
 		if (cookies != null && cookies.length > 0) {
 			for(Cookie c : cookies) {
 				if(c.getName().equals("username")) {
-					username = c.getValue();
+					username = URLDecoder.decode(c.getValue(), "utf-8");
 				}
 				if(c.getName().equals("password")) {
-					password = c.getValue();
+					password = URLDecoder.decode(c.getValue(), "utf-8");
 				}
 			}
 		}
